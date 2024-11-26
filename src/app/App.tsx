@@ -14,7 +14,7 @@ import UsersPage from './users/UsersPage'
 import { VerifyPage } from './auth/screens/VerifyPage'
 import { useLogout } from '../hooks/useLogout'
 
-const pathsPublic = ['/login', '/forgot-password', '/verify', '/recover']
+const pathsPublic = ['login', 'forgot-password', 'verify', 'recover']
 
 export const App = () => {
   const [loading, setLoading] = useState(true)
@@ -32,9 +32,15 @@ export const App = () => {
 
   useEffect(() => {
     const fetchAuth = async () => {
-      const isPublic = pathsPublic.some((path) => pathname.includes(path))
+      const paths = pathname.split('/')[1]
+      const isPublic = pathsPublic.includes(paths)
 
-      if ((!auth && !user.token) || !isPublic) {
+      if (isPublic) {
+        setLoading(false)
+        return
+      }
+
+      if (!auth && !user.token) {
         logoutAuth()
         navigate('/login')
         setLoading(false)
