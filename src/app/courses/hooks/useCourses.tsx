@@ -3,7 +3,7 @@ import { ApiFetch } from '../../../plugins/http/api-fetch'
 import { useAuthStore } from '../../../stores/auth/useAuthStore'
 import { CourseModel } from '../../../models/CourseModel'
 
-export const useCourses = () => {
+const useCourses = () => {
   const token = useAuthStore((state) => state.user.token)
 
   const http = new ApiFetch({ token })
@@ -17,3 +17,5 @@ export const useCourses = () => {
 
   return { data }
 }
+
+export default useCourses

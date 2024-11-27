@@ -14,6 +14,7 @@ import UsersPage from './users/UsersPage'
 import { VerifyPage } from './auth/screens/VerifyPage'
 import { useLogout } from '../hooks/useLogout'
 import CoursesPage from './courses/CoursesPage'
+import { CoursePage } from './courses/CoursePage'
 
 const pathsPublic = ['login', 'forgot-password', 'verify', 'recover']
 
@@ -125,6 +126,14 @@ export const App = () => {
           <Layout title="Cursos">
             <CoursesPage />
           </Layout>
+        </Route>
+
+        <Route path="/courses/:id/:name">
+          {(params) => (
+            <Layout title={params.name}>
+              <CoursePage />
+            </Layout>
+          )}
         </Route>
       </Route>
       <Route path="/*">

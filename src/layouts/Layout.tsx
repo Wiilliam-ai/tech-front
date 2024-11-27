@@ -64,7 +64,9 @@ export const Layout = ({ children, title = 'App' }: Props) => {
         </aside>
 
         {/** Coloca el <main> dentro de la cuadrícula usando columnas específicas */}
-        <main className="p-4 md:col-start-3 md:col-end-13">{children}</main>
+        <main className="p-4 md:col-start-3 md:col-end-13 h-full">
+          {children}
+        </main>
       </section>
 
       <ModalComponent />

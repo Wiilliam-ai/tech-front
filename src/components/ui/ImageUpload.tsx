@@ -89,17 +89,18 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
       />
 
       {image ? (
-        <div className="relative">
+        <div className="relative group">
           <img
             src={image}
             alt="Imagen subida"
-            className="w-full h-64 object-cover rounded-lg"
+            className="w-full h-36 object-cover rounded-lg"
           />
           <IconButton
             icon="trash"
             onClick={handleRemoveImage}
             label="Eliminar imagen"
-            className="absolute top-2 right-2"
+            size="sm"
+            className="absolute top-2 right-2 hidden group-hover:block"
             variant="destroy"
           />
         </div>

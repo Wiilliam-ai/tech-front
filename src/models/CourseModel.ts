@@ -32,4 +32,26 @@ export class CourseModel {
       }
     }
   }
+
+  async getCourse(id: number) {
+    try {
+      const result = await this.http.get<ICourse>(`/courses/${id}`)
+
+      const dataResult = result.data!
+
+      const courseMapped: ICourse = {
+        id: dataResult.id,
+        description: dataResult.description,
+        name: dataResult.name,
+        skills: dataResult.skills,
+        img: API_URL_BACK + '/assets/' + dataResult.img,
+      }
+
+      return courseMapped
+    } catch (error) {
+      if (error instanceof CustomError) {
+        toast.error(error.message)
+      }
+    }
+  }
 }

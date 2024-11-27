@@ -3,27 +3,10 @@ import { ICourse } from '../../../models/CourseModel'
 import { useAuthStore } from '../../../stores/auth/useAuthStore'
 import { Button, IconButton } from '../../../components'
 import { useLocation } from 'wouter'
+import fetchImage from '../utils/fetchImage'
 
 interface Props {
   course: ICourse
-}
-
-const fetchImage = async (img: string, token: string) => {
-  const response = await fetch(img, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
-
-  if (!response.ok) {
-    throw new Error('Error al cargar la imagen')
-  }
-
-  // Convierte la respuesta en un Blob
-  const blob = await response.blob()
-  // Crea una URL para el Blob
-  const imageUrl = URL.createObjectURL(blob)
-  return imageUrl
 }
 
 export const CardCourse = ({ course }: Props) => {
@@ -37,10 +20,10 @@ export const CardCourse = ({ course }: Props) => {
   })
 
   return (
-    <article className="bg-white w-full max-w-72 border rounded-xl overflow-hidden shadow-md">
+    <article className="bg-white w-full sm:max-w-72 border rounded-xl overflow-hidden shadow-md">
       <figure className="bg-gradient-to-br from-sky-700 to-indigo-900">
         <img
-          className="w-full max-w-md h-40 object-scale-down"
+          className="w-full max-w-md h-28 md:h-40 object-cover"
           src={imgSrc}
           alt={course.name}
         />
@@ -70,7 +53,7 @@ export const CardCourse = ({ course }: Props) => {
               label="Ir al curso"
               variant="primary"
               onClick={() => {
-                navigate(`${pathname}/${course.id}`)
+                navigate(`${pathname}/${course.id}/${course.name}`)
               }}
             />
           </div>
