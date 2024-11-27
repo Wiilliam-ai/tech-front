@@ -13,6 +13,7 @@ import { Layout } from '../layouts/Layout'
 import UsersPage from './users/UsersPage'
 import { VerifyPage } from './auth/screens/VerifyPage'
 import { useLogout } from '../hooks/useLogout'
+import CoursesPage from './courses/CoursesPage'
 
 const pathsPublic = ['login', 'forgot-password', 'verify', 'recover']
 
@@ -122,7 +123,7 @@ export const App = () => {
 
         <Route path="/courses">
           <Layout title="Cursos">
-            <h1>Cursos</h1>
+            <CoursesPage />
           </Layout>
         </Route>
       </Route>

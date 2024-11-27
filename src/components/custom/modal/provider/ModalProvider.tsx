@@ -50,8 +50,6 @@ export const ModalProvider = ({ children }: Props) => {
     setState(newState)
   }
 
-  console.log({ state })
-
   return (
     <ModalContext.Provider
       value={{
