@@ -1,9 +1,15 @@
+import { Button, useModalApp } from '../../../components'
+
 export const FormLessons = () => {
-  return <div>
-    <section>
-        <div>
-            
-        </div>
-    </section>
-  </div>
+  const { closeModal } = useModalApp()
+
+  return (
+    <div>
+      <section>
+        <div></div>
+      </section>
+
+      <Button label="Cancelar" variant="primary" onClick={closeModal} />
+    </div>
+  )
 }

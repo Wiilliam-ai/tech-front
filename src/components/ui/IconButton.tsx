@@ -6,6 +6,7 @@ import {
   TrashIcon,
   XCircleIcon,
   ReceiptText,
+  Settings2Icon,
 } from 'lucide-react'
 
 const configButton = {
@@ -24,6 +25,7 @@ const iconButton = {
   menu: MenuIcon,
   xicon: XCircleIcon,
   receipText: ReceiptText,
+  settings2: Settings2Icon,
 }
 
 const configSize = {

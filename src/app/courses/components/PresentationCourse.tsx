@@ -1,9 +1,8 @@
-import { useQuery } from '@tanstack/react-query'
 import { ICourse } from '../../../models/CourseModel'
-import fetchImage from '../utils/fetchImage'
-import { useAuthStore } from '../../../stores/auth/useAuthStore'
-import { useModalApp } from '../../../components'
+import { IconButton, useModalApp } from '../../../components'
 import { FormLessons } from './FormLessons'
+import { Image } from '../../../components/custom/image/Image'
+import { useState } from 'react'
 
 interface Props {
   course: ICourse
@@ -11,13 +10,7 @@ interface Props {
 
 export const PresentationCourse = ({ course }: Props) => {
   const { openModal } = useModalApp()
-  const token = useAuthStore((state) => state.user.token)
-
-  const { data: imgSrc } = useQuery({
-    queryKey: [course.img],
-    queryFn: () => fetchImage(course.img, token),
-    staleTime: 1000 * 60 * 15,
-  })
+  const [openOptions, setOpenOptions] = useState(false)
 
   const handleNewLesson = () => {
     openModal({
@@ -32,12 +25,31 @@ export const PresentationCourse = ({ course }: Props) => {
     <section>
       <section className="relative border rounded-3xl overflow-hidden">
         <figure className="h-[20rem]">
-          <img
+          <Image
+            src={course.img}
+            alt={course.name}
             className="w-full h-full object-cover object-center"
-            src={imgSrc}
-            alt=""
           />
         </figure>
+        <section className="absolute top-2 right-2 flex  flex-col items-end gap-2">
+          <IconButton
+            icon="settings2"
+            label="Configuración"
+            variant={openOptions ? 'primary' : 'secondary'}
+            size="sm"
+            onClick={() => setOpenOptions(!openOptions)}
+          />
+          {openOptions && (
+            <div className=" bg-white shadow-md rounded-md overflow-hidden">
+              <ul>
+                <li className="p-2 hover:bg-gray-200">Inhabilitar curso</li>
+                <li className="p-2 hover:bg-gray-200">Eliminar curso</li>
+                <li className="p-2 hover:bg-gray-200">Cambiar los datos</li>
+                <li className="p-2 hover:bg-gray-200">Cambiar imagen</li>
+              </ul>
+            </div>
+          )}
+        </section>
         <div className="absolute bottom-0 flex items-center justify-start w-full">
           <article className="p-4 bg-white ">
             <h2 className="text-2xl font-bold text-gray-800">{course.name}</h2>

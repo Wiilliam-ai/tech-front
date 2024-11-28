@@ -6,10 +6,11 @@ export const useModal = () => {
 }
 
 export const useModalApp = () => {
-  const { openModal, onAlert } = useContext(ModalContext)
+  const { openModal, onAlert, closeModal } = useContext(ModalContext)
 
   return {
     openModal,
     onAlert,
+    closeModal,
   }
 }
