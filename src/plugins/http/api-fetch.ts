@@ -110,4 +110,32 @@ export class ApiFetch implements HttpAdapter {
       body: JSON.stringify(body),
     })
   }
+
+  async postMedia<T>(url: string, data: FormData) {
+    try {
+      const response = await fetch(`${ApiFetch.API_URL}${url}`, {
+        method: 'POST',
+        headers: {
+          ...(this.token && { Authorization: `Bearer ${this.token}` }),
+        },
+        body: data,
+      })
+
+      const result: IResponse<T> = await response.json()
+
+      if (!response.ok) {
+        const existResult = result !== undefined
+        if (existResult) {
+          this.statusError = response.status
+          throw new CustomError(result.message)
+        }
+      }
+
+      return result
+    } catch (error) {
+      if (error instanceof CustomError) {
+        toast.error(error.message)
+      }
+    }
+  }
 }

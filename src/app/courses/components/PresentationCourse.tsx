@@ -1,6 +1,5 @@
 import { ICourse } from '../../../models/CourseModel'
-import { IconButton, useModalApp } from '../../../components'
-import { FormLessons } from './FormLessons'
+import { IconButton } from '../../../components'
 import { Image } from '../../../components/custom/image/Image'
 import { useState } from 'react'
 
@@ -9,17 +8,7 @@ interface Props {
 }
 
 export const PresentationCourse = ({ course }: Props) => {
-  const { openModal } = useModalApp()
   const [openOptions, setOpenOptions] = useState(false)
-
-  const handleNewLesson = () => {
-    openModal({
-      title: 'Nueva clase',
-      component: <FormLessons />,
-      widthDimension: 70,
-      dismissAuto: false,
-    })
-  }
 
   return (
     <section>
@@ -42,10 +31,18 @@ export const PresentationCourse = ({ course }: Props) => {
           {openOptions && (
             <div className=" bg-white shadow-md rounded-md overflow-hidden">
               <ul>
-                <li className="p-2 hover:bg-gray-200">Inhabilitar curso</li>
-                <li className="p-2 hover:bg-gray-200">Eliminar curso</li>
-                <li className="p-2 hover:bg-gray-200">Cambiar los datos</li>
-                <li className="p-2 hover:bg-gray-200">Cambiar imagen</li>
+                <li className="p-2 hover:bg-gray-200">
+                  <button>Inhabilitar curso</button>
+                </li>
+                <li className="p-2 hover:bg-gray-200">
+                  <button>Eliminar curso</button>
+                </li>
+                <li className="p-2 hover:bg-gray-200">
+                  <button>Cambiar los datos</button>
+                </li>
+                <li className="p-2 hover:bg-gray-200">
+                  <button>Cambiar la imagen</button>
+                </li>
               </ul>
             </div>
           )}
@@ -71,20 +68,6 @@ export const PresentationCourse = ({ course }: Props) => {
             </div>
           ))}
         </div>
-        <section className="mt-2 grid grid-cols-7 gap-3">
-          <div className="col-span-1 bg-white p-2 rounded-md h-max">
-            Otros cursos relacionados
-          </div>
-          <div className="col-span-6 bg-white p-2 rounded-md">
-            <h3 className="text-2xl font-bold text-center">Clases del curso</h3>
-            <button
-              className="bg-gray-200 p-2 w-full rounded-md my-2 border border-dashed border-sky-700 uppercase font-bold transition-all duration-500 hover:bg-gradient-to-b hover:from-sky-700 hover:to-indigo-800 hover:text-white"
-              onClick={handleNewLesson}
-            >
-              Agrega una nueva clase
-            </button>
-          </div>
-        </section>
       </section>
     </section>
   )

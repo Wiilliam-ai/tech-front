@@ -1,5 +1,9 @@
 import { createContext } from 'react'
-import { IModalEvent, IModalItem } from '../provider/ModalProvider'
+import {
+  IModalCustom,
+  IModalEvent,
+  IModalItem,
+} from '../provider/ModalProvider'
 
 export interface IConfModal {
   title: string
@@ -13,6 +17,7 @@ interface IModalContext {
   openModal: (conf: IConfModal) => void
   closeModal: () => void
   onAlert: (alert: IModalEvent) => void
+  onModalCustom: (custom: IModalCustom) => void
 }
 
 export const ModalContext = createContext<IModalContext>({} as IModalContext)

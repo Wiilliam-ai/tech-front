@@ -15,6 +15,10 @@ export interface IModalEvent {
   onAccept: () => Promise<void>
 }
 
+export interface IModalCustom {
+  body: JSX.Element | JSX.Element[]
+}
+
 interface Props {
   children: JSX.Element | JSX.Element[]
 }
@@ -22,6 +26,7 @@ interface Props {
 export type IModalItem =
   | ({ type: 'modal' } & IModalState)
   | ({ type: 'event' } & IModalEvent)
+  | ({ type: 'custom' } & IModalCustom)
 
 const INITIAL_STATE: IModalItem[] = []
 
@@ -44,6 +49,10 @@ export const ModalProvider = ({ children }: Props) => {
     setState([...state, { type: 'event', ...conf }])
   }
 
+  const handleModalCustom = (conf: IModalCustom) => {
+    setState([...state, { type: 'custom', ...conf }])
+  }
+
   const handleCloseModal = () => {
     // quitar el último modal o evento
     const newState = state.slice(0, -1)
@@ -57,6 +66,7 @@ export const ModalProvider = ({ children }: Props) => {
         openModal: handleOpenModal,
         closeModal: handleCloseModal,
         onAlert: handleEventModal,
+        onModalCustom: handleModalCustom,
       }}
     >
       {children}
