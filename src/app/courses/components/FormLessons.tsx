@@ -41,10 +41,6 @@ export const FormLessons = () => {
 
   const params = useParams<{ id: string }>()
 
-  console.log({
-    video,
-  })
-
   // Manejador de carga de video
   const handleVideoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files ? e.target.files[0] : null

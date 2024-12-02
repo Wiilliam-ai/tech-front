@@ -44,6 +44,7 @@ interface Props {
   variant: Variant
   icon: Icon
   className?: string
+  placeLabel?: string
   onClick: () => void
 }
 
@@ -54,6 +55,7 @@ export const IconButton = ({
   icon,
   className,
   size = 'md',
+  placeLabel,
 }: Props) => {
   const buttonClass = configButton[variant] || configButton.primary
 
@@ -64,12 +66,18 @@ export const IconButton = ({
 
   return (
     <button
-      className={clsx(buttonClass, 'shadow-md rounded-full', className)}
+      className={clsx(
+        buttonClass,
+        'shadow-md rounded-full flex items-center',
+        className,
+      )}
       type={'button'}
       onClick={onClick}
       aria-label={label}
+      title={label}
     >
       {Icon && <Icon size={sizeIcon} />}
+      {placeLabel ? <span className="ml-2">{label}</span> : null}
     </button>
   )
 }

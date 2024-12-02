@@ -1,8 +1,10 @@
 import { ChevronDown, VideoIcon } from 'lucide-react'
 import { ILessonByCourse } from '../interfaces/lesson-by-course.interface'
 import { useState } from 'react'
-import { useModalApp } from '../../../components'
+import { IconButton, useModalApp } from '../../../components'
 import { ModalVideo } from './ModalVideo'
+import { TargetDocs } from './TargetDocs'
+import { ModalDocs } from './ModalDocs'
 
 interface Props {
   lesson: ILessonByCourse
@@ -11,11 +13,22 @@ interface Props {
 
 export const CardLesson = ({ index, lesson }: Props) => {
   const [isExpanded, setIsExpanded] = useState(false)
-  const { onModalCustom } = useModalApp()
+  const { onModalCustom, openModal } = useModalApp()
+
+  const listDocuments = lesson.docs || []
 
   const handleOpenModal = () => {
     onModalCustom({
       body: <ModalVideo videoUrl={lesson.resources.url} />,
+      dismissAuto: false,
+    })
+  }
+
+  const handleOPenModal = () => {
+    openModal({
+      title: 'Agregar recurso',
+      component: <ModalDocs lessonId={lesson.id} />,
+      widthDimension: 20,
     })
   }
 
@@ -55,6 +68,28 @@ export const CardLesson = ({ index, lesson }: Props) => {
               <span className="font-semibold">Descripción:</span>{' '}
               {lesson.description}
             </p>
+          </div>
+
+          <div className="px-3">
+            <p className="text-gray-800">
+              <span className="font-semibold">Documentos:</span>
+            </p>
+
+            <div className="flex gap-2 w-full overflow-x-scroll py-3">
+              {listDocuments.map((doc, index) => (
+                <TargetDocs key={index} doc={doc} />
+              ))}
+            </div>
+            <div className="flex justify-end my-3">
+              <IconButton
+                onClick={handleOPenModal}
+                icon="plus"
+                variant="primary"
+                size="md"
+                label="Agragr recurso"
+                placeLabel="AGREGAR RECURSO"
+              />
+            </div>
           </div>
         </div>
       </div>

@@ -16,6 +16,7 @@ export interface IModalEvent {
 }
 
 export interface IModalCustom {
+  dismissAuto?: boolean
   body: JSX.Element | JSX.Element[]
 }
 

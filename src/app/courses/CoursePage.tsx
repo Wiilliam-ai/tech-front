@@ -1,4 +1,4 @@
-import { useParams } from 'wouter'
+import { Link, useParams } from 'wouter'
 import { useAuthStore } from '../../stores/auth/useAuthStore'
 import { ApiFetch } from '../../plugins/http/api-fetch'
 import { CourseModel } from '../../models/CourseModel'
@@ -42,6 +42,12 @@ export const CoursePage = () => {
 
   return (
     <div>
+      <Link
+        className="p-2 rounded-md transition-colors hover:bg-gray-300 mb-2 block w-max bg-sky-700 text-white hover:text-black"
+        href="/courses"
+      >
+        Regresar
+      </Link>
       <PresentationCourse course={course!} />
 
       <section className="mt-2 grid grid-cols-7 gap-3">

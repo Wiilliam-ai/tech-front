@@ -1,7 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { IResponseAuth } from '../../interfaces/auth.interface'
-import { addToWindow } from '../../utils/addToWindows'
 
 export type AuthStore = {
   auth: boolean
@@ -43,7 +42,3 @@ export const useAuthStore = create(
     { name: 'auth' },
   ),
 )
-
-export const StateAuthStore = useAuthStore.getState()
-
-addToWindow(StateAuthStore, 'AuthStore')

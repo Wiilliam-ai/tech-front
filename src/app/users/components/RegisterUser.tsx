@@ -75,6 +75,12 @@ export const RegisterUser: React.FC = () => {
       return
     }
 
+    const { doAdmin, doInst, doProf } = state.role
+    if (!doAdmin && !doInst && !doProf) {
+      setError('Seleccione un rol para el usuario')
+      return
+    }
+
     setIsSending(true)
 
     const result = await createUserMutation.mutateAsync({
