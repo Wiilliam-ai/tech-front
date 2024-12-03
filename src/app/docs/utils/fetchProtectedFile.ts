@@ -2,7 +2,7 @@ import { useAuthStore } from '../../../stores/auth/useAuthStore'
 
 const fetchProtectedFile = async (uri: string): Promise<string> => {
   const authStore = useAuthStore.getState()
-  const token = authStore.user.token
+  const token = authStore.dataAuth.token
 
   const response = await fetch(uri, {
     headers: {

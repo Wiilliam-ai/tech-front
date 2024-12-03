@@ -28,7 +28,7 @@ export const FormCourse: React.FC = () => {
   const [image, setImage] = useState<string | null>(null)
   const [file, setFile] = useState<File | null>(null) // Guardaremos el archivo original aquí
 
-  const token = useAuthStore((state) => state.user.token)
+  const token = useAuthStore((state) => state.dataAuth.token)
 
   const queryClient = useQueryClient()
 

@@ -67,7 +67,7 @@ export class UserModel {
     try {
       const result =
         await this.http.post<Omit<IResponseAuth, 'token'>>('/auth/verify')
-      return result
+      return result.data
     } catch (error) {
       if (error instanceof CustomError) {
         toast.error(error.message)

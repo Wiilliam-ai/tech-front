@@ -3,6 +3,9 @@ import { IconButton } from '../components'
 import { ModalComponent } from '../components/custom/modal/ModalComponent'
 import { ModalProvider } from '../components/custom/modal/provider/ModalProvider'
 import { NavLayout } from './NavLayout'
+import { Image } from '../components/custom/image/Image'
+import { useAuthStore } from '../stores/auth/useAuthStore'
+import { API_URL_BACK } from '../utils/contants'
 
 interface Props {
   title?: string
@@ -11,6 +14,9 @@ interface Props {
 
 export const Layout = ({ children, title = 'App' }: Props) => {
   const [isActived, setIsActived] = useState(false)
+  const dataUser = useAuthStore((state) => state.dataAuth)
+
+  const URL_PROFILE = `${API_URL_BACK}/assets/avatars/${dataUser.user?.avatar?.url}`
 
   return (
     <ModalProvider>
@@ -29,14 +35,10 @@ export const Layout = ({ children, title = 'App' }: Props) => {
           <h1 className="text-xl font-bold">{title}</h1>
 
           <div>
-            <img
-              src="h"
-              alt="Logo"
+            <Image
               className="size-10 border-2 border-white rounded-full"
-              title="Logo"
-              onError={(e) => {
-                e.currentTarget.src = 'https://via.placeholder.com/150'
-              }}
+              src={URL_PROFILE}
+              alt="Logo"
             />
           </div>
         </header>

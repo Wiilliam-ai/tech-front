@@ -8,13 +8,13 @@ import CompleteRecoverPage from './auth/screens/CompleteRecoverPage'
 import { useAuthStore } from '../stores/auth/useAuthStore'
 import { ApiFetch } from '../plugins/http/api-fetch'
 import { UserModel } from '../models'
-import { IUser } from '../interfaces/auth.interface'
 import { Layout } from '../layouts/Layout'
 import UsersPage from './users/UsersPage'
 import { VerifyPage } from './auth/screens/VerifyPage'
 import { useLogout } from '../hooks/useLogout'
 import CoursesPage from './courses/CoursesPage'
 import { CoursePage } from './courses/CoursePage'
+import { ProfilePage } from './profile/ProfilePage'
 
 const pathsPublic = ['login', 'forgot-password', 'verify', 'recover']
 
@@ -22,7 +22,7 @@ export const App = () => {
   const [loading, setLoading] = useState(true)
 
   const auth = useAuthStore((state) => state.auth)
-  const user = useAuthStore((state) => state.user)
+  const user = useAuthStore((state) => state.dataAuth)
   const logoutAuth = useAuthStore((state) => state.logoutAuth)
   const verifyAuth = useAuthStore((state) => state.verifyAuth)
   const [pathname, navigate] = useLocation()
@@ -58,11 +58,8 @@ export const App = () => {
         },
       })
 
-      if (result?.message) {
-        verifyAuth({
-          token: user.token,
-          user: result.data as unknown as IUser,
-        })
+      if (result?.user) {
+        verifyAuth(result.user)
       }
 
       const isViewLogin = pathname === '/login'
@@ -122,6 +119,12 @@ export const App = () => {
           </Layout>
         </Route>
 
+        <Route path="/profile">
+          <Layout title="Mi perfil">
+            <ProfilePage />
+          </Layout>
+        </Route>
+
         <Route path="/courses">
           <Layout title="Cursos">
             <CoursesPage />
@@ -129,11 +132,9 @@ export const App = () => {
         </Route>
 
         <Route path="/courses/:id/:name">
-          {(params) => (
-            <Layout title={params.name}>
-              <CoursePage />
-            </Layout>
-          )}
+          <Layout title="Curso">
+            <CoursePage />
+          </Layout>
         </Route>
       </Route>
       <Route path="/*">

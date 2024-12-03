@@ -1,38 +1,14 @@
-import { HouseIcon, PowerIcon, UserCircleIcon, UsersIcon } from 'lucide-react'
+import { PowerIcon } from 'lucide-react'
 import { Link } from 'wouter'
 import { useModalApp } from '../components'
 import { useLogout } from '../hooks/useLogout'
-
-const navItems = [
-  {
-    title: 'Resumen',
-    url: '/',
-    Icon: HouseIcon,
-  },
-  {
-    title: 'Cursos',
-    url: '/courses',
-    Icon: UserCircleIcon,
-  },
-  {
-    title: 'Usuarios',
-    url: '/users',
-    Icon: UsersIcon,
-  },
-  {
-    title: 'Roadmaps',
-    url: '/contact',
-    Icon: UserCircleIcon,
-  },
-  {
-    title: 'Roadmaps',
-    url: '/contact',
-    Icon: UserCircleIcon,
-  },
-]
+import { getNavItems } from './utils/getNavItems'
+import { useAuthStore } from '../stores/auth/useAuthStore'
 
 export const NavLayout = () => {
   const { logoutUser } = useLogout()
+  const user = useAuthStore((state) => state.dataAuth.user)
+  const navItems = getNavItems(user)
 
   const { onAlert } = useModalApp()
 

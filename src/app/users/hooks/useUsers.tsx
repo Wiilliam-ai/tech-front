@@ -4,7 +4,7 @@ import { useAuthStore } from '../../../stores/auth/useAuthStore'
 import { IUserRegister, UserModel } from '../../../models'
 
 export const useUsers = () => {
-  const token = useAuthStore((state) => state.user.token)
+  const token = useAuthStore((state) => state.dataAuth.token)
   const http = new ApiFetch({ token })
   const userModel = new UserModel(http)
 

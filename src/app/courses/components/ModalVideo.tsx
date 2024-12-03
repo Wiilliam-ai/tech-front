@@ -11,7 +11,7 @@ export const ModalVideo = ({ videoUrl }: Props) => {
 
   const { closeModal } = useModalApp()
 
-  const token = useAuthStore((state) => state.user.token)
+  const token = useAuthStore((state) => state.dataAuth.token)
 
   const [video, setVideo] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)

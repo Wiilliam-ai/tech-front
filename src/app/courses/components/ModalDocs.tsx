@@ -26,7 +26,7 @@ export const ModalDocs = ({ lessonId }: Props) => {
   const [isSending, setIsSending] = useState(false)
   const [state, setState] = useState(initialDoc)
 
-  const token = useAuthStore((state) => state.user.token)
+  const token = useAuthStore((state) => state.dataAuth.token)
   const queryClient = useQueryClient()
   const params = useParams<{ id: string }>()
 

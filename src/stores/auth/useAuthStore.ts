@@ -1,13 +1,14 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { IResponseAuth } from '../../interfaces/auth.interface'
+import { IResponseAuth, IUser } from '../../interfaces/auth.interface'
 
 export type AuthStore = {
   auth: boolean
-  user: IResponseAuth
+  dataAuth: IResponseAuth
   loginAuth: (user: IResponseAuth) => void
-  verifyAuth: (user: IResponseAuth) => void
+  verifyAuth: (user: IUser) => void
   logoutAuth: () => void
+  upldateAvatar: (avatar: string) => void
 }
 
 const IResponseAuthDefault: IResponseAuth = {
@@ -34,10 +35,26 @@ export const useAuthStore = create(
   persist<AuthStore>(
     (set) => ({
       auth: false,
-      user: IResponseAuthDefault,
-      loginAuth: (user) => set({ auth: true, user }),
-      logoutAuth: () => set({ auth: false, user: IResponseAuthDefault }),
-      verifyAuth: (user) => set({ auth: true, user }),
+      dataAuth: IResponseAuthDefault,
+      loginAuth: (user) => set({ auth: true, dataAuth: user }),
+      logoutAuth: () => set({ auth: false, dataAuth: IResponseAuthDefault }),
+      verifyAuth: (user) =>
+        set((state) => ({
+          dataAuth: {
+            token: state.dataAuth.token,
+            user: user,
+          },
+        })),
+      upldateAvatar: (avatar) =>
+        set((state) => ({
+          dataAuth: {
+            ...state.dataAuth,
+            avatar: {
+              ...state.dataAuth.user.avatar,
+              url: avatar,
+            },
+          },
+        })),
     }),
     { name: 'auth' },
   ),

@@ -12,7 +12,7 @@ import { toast } from 'react-toastify'
 export default function UsersPage() {
   const { openModal, onAlert } = useModalApp()
   const { data: users } = useUsers()
-  const token = useAuthStore((state) => state.user.token)
+  const token = useAuthStore((state) => state.dataAuth.token)
 
   const handleAddUser = () => {
     openModal({

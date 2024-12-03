@@ -7,6 +7,7 @@ import {
   XCircleIcon,
   ReceiptText,
   Settings2Icon,
+  CameraIcon,
 } from 'lucide-react'
 
 const configButton = {
@@ -15,7 +16,7 @@ const configButton = {
     'text-white bg-gray-700 p-2 border border-gray-700 hover:bg-gray-800',
   destroy: 'text-white bg-red-700 p-2 border border-red-700 hover:bg-red-800',
   blank:
-    'text-white bg-transparent p-2 border border-transparent hover:bg-gray-800',
+    'text-black bg-white p-2 border border-white transition-all hover:shadow-md hover:text-sky-700 hover:border-sky-700',
 }
 
 const iconButton = {
@@ -26,6 +27,7 @@ const iconButton = {
   xicon: XCircleIcon,
   receipText: ReceiptText,
   settings2: Settings2Icon,
+  camera: CameraIcon,
 }
 
 const configSize = {

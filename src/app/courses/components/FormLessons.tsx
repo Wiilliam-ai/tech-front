@@ -37,7 +37,7 @@ export const FormLessons = () => {
     content: '',
   })
 
-  const token = useAuthStore((state) => state.user.token)
+  const token = useAuthStore((state) => state.dataAuth.token)
 
   const params = useParams<{ id: string }>()
 

@@ -4,7 +4,7 @@ import { useAuthStore } from '../../../stores/auth/useAuthStore'
 import { LessonModel } from '../../../models/LessonModel'
 
 export const useLessons = (coursId: number) => {
-  const token = useAuthStore((state) => state.user.token)
+  const token = useAuthStore((state) => state.dataAuth.token)
 
   const http = new ApiFetch({ token: token })
   const lessonModel = new LessonModel(http)

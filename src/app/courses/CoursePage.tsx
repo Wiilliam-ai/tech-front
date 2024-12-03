@@ -11,7 +11,7 @@ import { SectionLessons } from './components/SectionLessons'
 export const CoursePage = () => {
   const { openModal } = useModalApp()
   const params = useParams<{ id: string }>()
-  const token = useAuthStore((state) => state.user.token)
+  const token = useAuthStore((state) => state.dataAuth.token)
 
   const fetchCourse = async () => {
     const http = new ApiFetch({ token: token })

@@ -23,7 +23,7 @@ interface Props {
 
 export const TargetDocs = ({ doc }: Props) => {
   const { onAlert, openModal } = useModalApp()
-  const token = useAuthStore((state) => state.user.token)
+  const token = useAuthStore((state) => state.dataAuth.token)
   const queryClient = useQueryClient()
   const params = useParams<{ id: string }>()
 

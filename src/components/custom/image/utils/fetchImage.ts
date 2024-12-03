@@ -3,7 +3,7 @@ import { useAuthStore } from '../../../../stores/auth/useAuthStore'
 const fetchImage = async (img: string) => {
   try {
     const authStore = useAuthStore.getState()
-    const token = authStore.user.token
+    const token = authStore.dataAuth.token
 
     const response = await fetch(img, {
       headers: {
