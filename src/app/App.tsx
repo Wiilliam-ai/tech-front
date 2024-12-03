@@ -131,7 +131,7 @@ export const App = () => {
           </Layout>
         </Route>
 
-        <Route path="/courses/:id/:name">
+        <Route path="/courses/:id">
           <Layout title="Curso">
             <CoursePage />
           </Layout>

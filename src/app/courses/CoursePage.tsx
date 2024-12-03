@@ -12,6 +12,8 @@ export const CoursePage = () => {
   const { openModal } = useModalApp()
   const params = useParams<{ id: string }>()
   const token = useAuthStore((state) => state.dataAuth.token)
+  const user = useAuthStore((state) => state.dataAuth.user)
+  const { role } = user
 
   const fetchCourse = async () => {
     const http = new ApiFetch({ token: token })
@@ -56,12 +58,14 @@ export const CoursePage = () => {
         </div>
         <div className="col-span-6 bg-white p-2 rounded-md">
           <h3 className="text-2xl font-bold text-center">Clases del curso</h3>
-          <button
-            className="bg-gray-200 p-2 w-full rounded-md my-2 border border-dashed border-sky-700 uppercase font-bold transition-all duration-500 hover:bg-gradient-to-b hover:from-sky-700 hover:to-indigo-800 hover:text-white"
-            onClick={handleNewLesson}
-          >
-            Agrega una nueva clase
-          </button>
+          {(role.doAdmin || role.doProf) && (
+            <button
+              className="bg-gray-200 p-2 w-full rounded-md my-2 border border-dashed border-sky-700 uppercase font-bold transition-all duration-500 hover:bg-gradient-to-b hover:from-sky-700 hover:to-indigo-800 hover:text-white"
+              onClick={handleNewLesson}
+            >
+              Agrega una nueva clase
+            </button>
+          )}
           <SectionLessons />
         </div>
       </section>

@@ -1,5 +1,5 @@
 import {
-  BookText,
+  // BookText,
   BoxIcon,
   HouseIcon,
   LucideProps,
@@ -44,12 +44,13 @@ export const getNavItems = (user: IUser) => {
       Icon: UsersIcon,
       isView: user.role?.doAdmin,
     },
+    /*,
     {
       title: 'Roadmaps',
       url: '/roadmaps',
       Icon: BookText,
       isView: true,
-    },
+    },*/
   ]
 
   const navItemsFiltered = navItems.filter((item) => item.isView)

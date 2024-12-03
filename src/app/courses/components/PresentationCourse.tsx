@@ -2,6 +2,7 @@ import { ICourse } from '../../../models/CourseModel'
 import { IconButton } from '../../../components'
 import { Image } from '../../../components/custom/image/Image'
 import { useState } from 'react'
+import { useAuthStore } from '../../../stores/auth/useAuthStore'
 
 interface Props {
   course: ICourse
@@ -9,6 +10,9 @@ interface Props {
 
 export const PresentationCourse = ({ course }: Props) => {
   const [openOptions, setOpenOptions] = useState(false)
+
+  const user = useAuthStore((state) => state.dataAuth.user)
+  const { role } = user
 
   return (
     <section>
@@ -21,13 +25,16 @@ export const PresentationCourse = ({ course }: Props) => {
           />
         </figure>
         <section className="absolute top-2 right-2 flex  flex-col items-end gap-2">
-          <IconButton
-            icon="settings2"
-            label="Configuración"
-            variant={openOptions ? 'primary' : 'secondary'}
-            size="sm"
-            onClick={() => setOpenOptions(!openOptions)}
-          />
+          {role.doAdmin && (
+            <IconButton
+              icon="settings2"
+              label="Configuración"
+              variant={openOptions ? 'primary' : 'secondary'}
+              size="sm"
+              onClick={() => setOpenOptions(!openOptions)}
+            />
+          )}
+
           {openOptions && (
             <div className=" bg-white shadow-md rounded-md overflow-hidden">
               <ul>

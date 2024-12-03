@@ -73,7 +73,7 @@ export const TargetDocs = ({ doc }: Props) => {
     openModal({
       title: textTitle,
       component: component,
-      widthDimension: 35,
+      widthDimension: 45,
     })
   }
 
