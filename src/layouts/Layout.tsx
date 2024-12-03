@@ -36,7 +36,7 @@ export const Layout = ({ children, title = 'App' }: Props) => {
 
           <div>
             <Image
-              className="size-10 border-2 border-white rounded-full"
+              className="size-10 border-2 border-white rounded-full object-cover"
               src={URL_PROFILE}
               alt="Logo"
             />

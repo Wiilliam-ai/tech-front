@@ -1,20 +1,21 @@
+import { Image } from '../../../components/custom/image/Image'
 import { IUserWeb } from '../../../interfaces/auth.interface'
+import { API_URL_BACK } from '../../../utils/contants'
 
 interface Props {
   user: IUserWeb
 }
 
 export const DetailUser = ({ user }: Props) => {
+  const URL_PROFILE = `${API_URL_BACK}/assets/avatars/${user.avatar.url}`
+
   return (
     <div>
       <div className="flex flex-col items-center">
-        <img
-          src={user.avatar.url}
+        <Image
+          src={URL_PROFILE}
           alt="user"
-          className="w-32 h-32 rounded-full border-2 border-sky-700"
-          onError={(e) => {
-            e.currentTarget.src = 'https://i.pravatar.cc/300'
-          }}
+          className="w-32 h-32 rounded-full border-2 border-sky-700 object-cover"
         />
         <h2 className="text-xl font-bold mt-2">
           {user.firstName} {user.lastName}
